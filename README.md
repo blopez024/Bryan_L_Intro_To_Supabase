@@ -2,6 +2,8 @@
 
 Welcome! This project is a beginner-friendly walkthrough to build a full stack application using Supabase, Express.js, and Vite (vanilla JS). You'll learn how to work with databases, authentication, API routes, and a modern frontend.
 
+![Simple Working Supabase App](/supabase_preview.gif)
+
 ## Topics Covered
 
 ### ✅ Supabase Fundamentals
