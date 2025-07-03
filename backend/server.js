@@ -11,6 +11,7 @@ app.get("/persons", async function (req, res) {
     // New Code
     // Use the Supabase Client to choose the table we want to pull data from and what data we want to pull. 
     // The * means all columns from the table
+    console.log("Received GET /persons");
     const { data, error } = await supabase.from("persons").select("*");
 
     // If there is an error getting data, let's send a response back to 
