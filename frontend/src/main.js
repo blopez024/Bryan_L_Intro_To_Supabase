@@ -8,7 +8,10 @@ async function loadPersons() {
     console.log(data);
     const personsGrid = createGrid(data);
     const app = document.getElementById("app");
+    // app.appendChild(personsGrid);
+    app.innerHTML = '';
     app.appendChild(personsGrid);
+
 
   } catch (err) {
     console.log(err);
@@ -61,3 +64,48 @@ function createGrid(data) {
   return gridContainer;
 }
 
+document.getElementById('userForm').addEventListener('submit', async function (e) {
+  e.preventDefault();
+
+  const nameEl = document.getElementById('name');
+  const emailEl = document.getElementById('email');
+  const roleEl = document.getElementById('role');
+
+  const name = nameEl.value;
+  const email = emailEl.value;
+  const role = roleEl.value;
+
+  // Prepare data for submission
+  const userData = {
+    name: name,
+    email: email,
+    role: role
+  };
+
+  // Here you would typically send the data to your server
+  console.log('Submitting user data:', userData);
+
+  try {
+    const resp = await fetch('http://localhost:8080/persons', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userData)
+    })
+
+    if (resp.status != 201) {
+      throw new Error("Failed to create new person")
+    }
+
+    await loadPersons();
+
+    // Reset the fields to a default value
+    nameEl.value = "";
+    emailEl.value = "";
+    roleEl.value = "USER";
+  } catch (err) {
+    console.error('Error:', error);
+    alert('Error creating user');
+  }
+});
